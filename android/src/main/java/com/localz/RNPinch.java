@@ -32,6 +32,11 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 
+import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.net.CookieStore;
+import java.net.HttpCookie;
+
 public class RNPinch extends ReactContextBaseJavaModule {
 
     private static final String OPT_METHOD_KEY = "method";
@@ -49,6 +54,10 @@ public class RNPinch extends ReactContextBaseJavaModule {
     public RNPinch(ReactApplicationContext reactContext) {
         super(reactContext);
         httpUtil = new HttpUtil();
+
+        CookieManager cookieManager = new CookieManager();
+        CookieHandler.setDefault(cookieManager);
+
         try {
             PackageManager pManager = reactContext.getPackageManager();
             packageName = reactContext.getPackageName();
