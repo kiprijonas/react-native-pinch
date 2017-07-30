@@ -135,7 +135,7 @@ public class HttpUtil {
 
             response.statusCode = status;
             response.statusText = statusText;
-            response.base64 = getBytesFromInputStream(responseStream);
+            response.base64 = Base64.encodeToString(getBytesFromInputStream(responseStream), Base64.NO_WRAP);
             response.bodyString = getResponseBody(responseStream);
             response.headers = getResponseHeaders(connection);
 
