@@ -44,6 +44,7 @@ public class RNPinch extends ReactContextBaseJavaModule {
     private static final String OPT_BODY_KEY = "body";
     private static final String OPT_SSL_PINNING_KEY = "sslPinning";
     private static final String OPT_TIMEOUT_KEY = "timeoutInterval";
+    private static final String OPT_IS_ATTACHMENT= "isAttachment";
 
     private HttpUtil httpUtil;
     private String packageName = null;
@@ -96,6 +97,7 @@ public class RNPinch extends ReactContextBaseJavaModule {
             try {
                 WritableMap response = Arguments.createMap();
                 HttpRequest request = new HttpRequest(endpoint[0]);
+                boolean isAttachment = false;
 
                 if (opts.hasKey(OPT_BODY_KEY)) {
                     request.body = opts.getString(OPT_BODY_KEY);
@@ -112,6 +114,9 @@ public class RNPinch extends ReactContextBaseJavaModule {
                 if (opts.hasKey(OPT_TIMEOUT_KEY)) {
                     request.timeout = opts.getInt(OPT_TIMEOUT_KEY);
                 }
+                if (opts.hasKey(OPT_IS_ATTACHMENT)) {
+                    isAttachment = opts.getBoolean(OPT_IS_ATTACHMENT);
+                }
 
                 HttpResponse httpResponse = httpUtil.sendHttpRequest(request);
                 JSONObject jsonHeaders = new JSONObject(httpResponse.headers.toString());
@@ -119,6 +124,8 @@ public class RNPinch extends ReactContextBaseJavaModule {
                 response.putInt("status", httpResponse.statusCode);
                 response.putString("statusText", httpResponse.statusText);
                 response.putString("bodyString", httpResponse.bodyString);
+                response.putString("base64", httpResponse.base64);
+                response.putString("isAttachment", isAttachment);
                 response.putMap("headers", Arguments.fromBundle(BundleJSONConverter.convertToBundle(jsonHeaders)));
 
                 return response;

@@ -7,13 +7,15 @@ public class HttpResponse {
     public JSONObject headers;
     public String bodyString;
     public String statusText;
+    public String base64;
 
     public HttpResponse() {}
 
-    public HttpResponse(int statusCode, JSONObject headers, String bodyString, String statusText) {
+    public HttpResponse(int statusCode, JSONObject headers, String bodyString, String statusText, String base64) {
         this.statusCode = statusCode;
         this.headers = headers;
         this.bodyString = bodyString;
         this.statusText = statusText;
+        this.base64 = base64;
     }
 }

@@ -135,6 +135,7 @@ public class HttpUtil {
 
             response.statusCode = status;
             response.statusText = statusText;
+            response.base64 = getBytesFromInputStream(responseStream);
             response.bodyString = getResponseBody(responseStream);
             response.headers = getResponseHeaders(connection);
 
@@ -144,5 +145,20 @@ public class HttpUtil {
                 responseStream.close();
             }
         }
+    }
+
+    private byte[] getBytesFromInputStream(InputStream inputStream) {
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+
+        int nRead;
+        byte[] data = new byte[16384];
+
+        while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
+            buffer.write(data, 0, nRead);
+        }
+
+        buffer.flush();
+
+        return buffer.toByteArray();
     }
 }
