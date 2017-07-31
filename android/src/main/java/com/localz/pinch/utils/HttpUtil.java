@@ -95,7 +95,20 @@ public class HttpUtil {
         connection.setConnectTimeout(request.timeout);
         connection.setReadTimeout(request.timeout);
 
-        if (request.body != null && (method.equals("POST") || method.equals("PUT"))) {
+        if (request.isAttachment) {
+            byte[] body = Base64.decode(request.body, Base64.NO_WRAP);
+
+            connection.setRequestProperty("Content-length", body.length + "");
+            connection.setDoInput(true);
+            connection.setDoOutput(true);
+            connection.setUseCaches(false);
+
+            OutputStream outputStream = connection.getOutputStream();
+            outputStream.write(body);
+            outputStream.close();
+        }
+
+        if (!request.isAttachment && request.body != null && (method.equals("POST") || method.equals("PUT"))) {
             // Set the content length of the body.
             connection.setRequestProperty("Content-length", request.body.getBytes().length + "");
             connection.setDoInput(true);

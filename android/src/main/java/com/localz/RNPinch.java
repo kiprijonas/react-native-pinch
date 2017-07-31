@@ -115,7 +115,7 @@ public class RNPinch extends ReactContextBaseJavaModule {
                     request.timeout = opts.getInt(OPT_TIMEOUT_KEY);
                 }
                 if (opts.hasKey(OPT_IS_ATTACHMENT)) {
-                    isAttachment = opts.getBoolean(OPT_IS_ATTACHMENT);
+                    request.isAttachment = opts.getBoolean(OPT_IS_ATTACHMENT);
                 }
 
                 HttpResponse httpResponse = httpUtil.sendHttpRequest(request);
