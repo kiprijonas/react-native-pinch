@@ -10,6 +10,7 @@ public class HttpRequest {
     public String certFilename;
     public int timeout;
     public boolean isAttachment;
+    public boolean isBase64;
 
     private static final int DEFAULT_TIMEOUT = 10000;
 
@@ -22,7 +23,7 @@ public class HttpRequest {
         this.timeout = DEFAULT_TIMEOUT;
     }
 
-    public HttpRequest(String endpoint, String method, JSONObject headers, String body, String certFilename, int timeout, boolean isAttachment) {
+    public HttpRequest(String endpoint, String method, JSONObject headers, String body, String certFilename, int timeout, boolean isAttachment, boolean isBase64) {
         this.endpoint = endpoint;
         this.method = method;
         this.headers = headers;
@@ -30,5 +31,6 @@ public class HttpRequest {
         this.certFilename = certFilename;
         this.timeout = timeout;
         this.isAttachment = isAttachment;
+        this.isBase64 = isBase64;
     }
 }

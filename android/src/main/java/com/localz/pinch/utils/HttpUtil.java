@@ -152,7 +152,7 @@ public class HttpUtil {
             response.statusCode = status;
             response.statusText = statusText;
 
-            if (request.isAttachment) {
+            if (request.isBase64) {
                 response.base64 = Base64.encodeToString(getBytesFromInputStream(responseStream), Base64.NO_WRAP);
             }
 
