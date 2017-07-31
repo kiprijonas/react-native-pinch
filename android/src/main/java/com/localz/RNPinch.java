@@ -131,7 +131,7 @@ public class RNPinch extends ReactContextBaseJavaModule {
                 }
 
                 response.putString("bodyString", httpResponse.bodyString);
-                response.putBoolean("isAttachment", isAttachment);
+                response.putBoolean("isAttachment", request.isAttachment);
                 response.putMap("headers", Arguments.fromBundle(BundleJSONConverter.convertToBundle(jsonHeaders)));
 
                 return response;
