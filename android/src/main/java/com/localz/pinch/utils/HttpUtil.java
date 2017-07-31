@@ -23,6 +23,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import android.util.Base64;
+import java.io.ByteArrayOutputStream;
+
 import javax.net.ssl.HttpsURLConnection;
 
 public class HttpUtil {
@@ -147,7 +150,7 @@ public class HttpUtil {
         }
     }
 
-    private byte[] getBytesFromInputStream(InputStream inputStream) {
+    private byte[] getBytesFromInputStream(InputStream inputStream) throws IOException {
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 
         int nRead;
