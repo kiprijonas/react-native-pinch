@@ -90,7 +90,6 @@ public class HttpUtil {
 
         connection = prepareRequestHeaders(connection, request.headers);
 
-        connection.setRequestProperty("Accept-Charset", "UTF-8");
         connection.setAllowUserInteraction(false);
         connection.setConnectTimeout(request.timeout);
         connection.setReadTimeout(request.timeout);
@@ -98,7 +97,6 @@ public class HttpUtil {
         if (request.isAttachment) {
             byte[] body = Base64.decode(request.body, Base64.NO_WRAP);
 
-            connection.setRequestProperty("Content-length", body.length + "");
             connection.setDoInput(true);
             connection.setDoOutput(true);
             connection.setUseCaches(false);
@@ -109,6 +107,7 @@ public class HttpUtil {
         }
 
         if (!request.isAttachment && request.body != null && (method.equals("POST") || method.equals("PUT"))) {
+            connection.setRequestProperty("Accept-Charset", "UTF-8");
             // Set the content length of the body.
             connection.setRequestProperty("Content-length", request.body.getBytes().length + "");
             connection.setDoInput(true);
