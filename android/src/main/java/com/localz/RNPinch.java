@@ -44,7 +44,7 @@ public class RNPinch extends ReactContextBaseJavaModule {
     private static final String OPT_SSL_PINNING_KEY = "sslPinning";
     private static final String OPT_TIMEOUT_KEY = "timeoutInterval";
     private static final String OPT_IS_ATTACHMENT= "isAttachment";
-    private static final String OPT_IS_BASE64= "getBase64";
+    private static final String OPT_IS_BASE64= "isBase64";
 
     private HttpUtil httpUtil;
     private String packageName = null;
